@@ -1,0 +1,259 @@
+Index: app/src/main/java/com/example/android/courtcounter/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/courtcounter/MainActivity.java	(revision 6594158285ef88c2941c0cba71597a4a10e8eebf)
++++ app/src/main/java/com/example/android/courtcounter/MainActivity.java	(revision )
+@@ -1,10 +1,13 @@
+ package com.example.android.courtcounter;
+ 
++import android.content.Intent;
+ import android.support.v7.app.AppCompatActivity;
+ import android.os.Bundle;
+ import android.view.View;
++import android.widget.ProgressBar;
+ import android.widget.TextView;
+ 
++
+ public class MainActivity extends AppCompatActivity {
+     // Tracks the score for Teams
+     int scoreTeamA = 0;
+@@ -15,6 +18,7 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+         displayForTeamA(0);
++        displayForTeamB(0);
+     }
+ 
+ 
+@@ -78,6 +82,7 @@
+     }
+ 
+ 
++
+     /**
+ 
+      * Displays the given score for Team A.
+@@ -87,8 +92,11 @@
+     public void displayForTeamA(int scoreTeamA) {
+ 
+         TextView scoreView = (TextView) findViewById(R.id.team_a_score);
+-
+         scoreView.setText(String.valueOf(scoreTeamA));
++
++        ProgressBar progressBarA = (ProgressBar) findViewById(R.id.progressBarA);
++        progressBarA.setProgress(scoreTeamA);
++
+     }
+ 
+ 
+@@ -101,8 +109,10 @@
+     public void displayForTeamB(int scoreTeamB) {
+ 
+         TextView scoreView = (TextView) findViewById(R.id.team_b_score);
+-
+         scoreView.setText(String.valueOf(scoreTeamB));
++
++        ProgressBar progressBarB = (ProgressBar) findViewById(R.id.progressBarB);
++        progressBarB.setProgress(scoreTeamB);
+     }
+ 
+ 
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 6594158285ef88c2941c0cba71597a4a10e8eebf)
++++ build.gradle	(revision )
+@@ -7,7 +7,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:3.0.0'
++        classpath 'com.android.tools.build:gradle:3.0.1'
+         
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 6594158285ef88c2941c0cba71597a4a10e8eebf)
++++ app/src/main/res/layout/activity_main.xml	(revision )
+@@ -5,6 +5,19 @@
+     android:layout_height="match_parent"
+     tools:context="com.example.android.courtcounter.MainActivity">
+ 
++    <ImageView
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:src="@drawable/background"
++        android:scaleType="centerCrop"/>
++
++    <ImageView
++        android:layout_width="140dp"
++        android:layout_height="140dp"
++        android:layout_above="@+id/reset_btn"
++        android:layout_centerHorizontal="true"
++        android:src="@drawable/logo" />
++
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+@@ -20,7 +33,7 @@
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_margin="16dp"
++                android:layout_margin="20dp"
+                 android:fontFamily="sans-serif-medium"
+                 android:gravity="center_horizontal"
+                 android:text="Team A"
+@@ -31,21 +44,37 @@
+                 android:id="@+id/team_a_score"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginBottom="24dp"
++                android:layout_marginBottom="8dp"
+                 android:fontFamily="sans-serif-light"
++                android:textStyle="bold"
+                 android:gravity="center_horizontal"
+                 android:text="0"
+-                android:textColor="#000000"
++                android:textColor="#ffffff"
++                android:shadowColor="@android:color/black"
++                android:shadowRadius="2"
++                android:shadowDx="2"
++                android:shadowDy="2"
+                 android:textSize="56sp" />
+ 
++            <ProgressBar
++                android:id="@+id/progressBarA"
++                android:layout_marginLeft="28dp"
++                android:layout_marginRight="28dp"
++                android:layout_marginBottom="8dp"
++                style="@android:style/Widget.ProgressBar.Horizontal"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:progress="0"
++                android:max="200"/>
++
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="8dp"
+                 android:layout_marginLeft="24dp"
+                 android:layout_marginRight="24dp"
+-                android:onClick="addThreeToTeamA"
+-                android:text="+3 Points" />
++                android:onClick="addOneTeamA"
++                android:text="Free Throw" />
+ 
+             <Button
+                 android:layout_width="match_parent"
+@@ -59,17 +88,18 @@
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginBottom="8dp"
+                 android:layout_marginLeft="24dp"
+                 android:layout_marginRight="24dp"
+-                android:onClick="addOneTeamA"
+-                android:text="Free Throw" />
++                android:onClick="addThreeToTeamA"
++                android:text="+3 Points" />
++
+         </LinearLayout>
+ 
+         <View
+             android:layout_width="1dp"
+             android:layout_height="match_parent"
+             android:layout_marginTop="16dp"
++            android:layout_marginBottom="8dp"
+             android:background="@android:color/darker_gray" />
+ 
+         <LinearLayout
+@@ -81,7 +111,7 @@
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_margin="16dp"
++                android:layout_margin="20dp"
+                 android:fontFamily="sans-serif-medium"
+                 android:gravity="center_horizontal"
+                 android:text="Team B"
+@@ -92,21 +122,37 @@
+                 android:id="@+id/team_b_score"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginBottom="24dp"
++                android:layout_marginBottom="8dp"
+                 android:fontFamily="sans-serif-light"
++                android:textStyle="bold"
+                 android:gravity="center_horizontal"
+                 android:text="0"
+-                android:textColor="#000000"
++                android:textColor="#ffffff"
++                android:shadowColor="@android:color/black"
++                android:shadowRadius="2"
++                android:shadowDx="2"
++                android:shadowDy="2"
+                 android:textSize="56sp" />
+ 
++            <ProgressBar
++                android:id="@+id/progressBarB"
++                android:layout_marginLeft="28dp"
++                android:layout_marginRight="28dp"
++                android:layout_marginBottom="8dp"
++                style="@android:style/Widget.ProgressBar.Horizontal"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:progress="0"
++                android:max="200"/>
++
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="8dp"
+                 android:layout_marginLeft="24dp"
+                 android:layout_marginRight="24dp"
+-                android:onClick="addThreeToTeamB"
+-                android:text="+3 Points" />
++                android:onClick="addOneTeamB"
++                android:text="Free Throw" />
+ 
+             <Button
+                 android:layout_width="match_parent"
+@@ -120,11 +166,11 @@
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginBottom="8dp"
+                 android:layout_marginLeft="24dp"
+                 android:layout_marginRight="24dp"
+-                android:onClick="addOneTeamB"
+-                android:text="Free Throw" />
++                android:onClick="addThreeToTeamB"
++                android:text="+3 Points" />
++
+         </LinearLayout>
+ 
+     </LinearLayout>
+@@ -132,9 +178,13 @@
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:textColor="@android:color/holo_red_dark"
++        android:textStyle="bold"
++        android:id="@+id/reset_btn"
+         android:layout_alignParentBottom="true"
+         android:layout_centerInParent="true"
+-        android:layout_marginBottom="32dp"
++        android:layout_marginBottom="24dp"
+         android:onClick="resetScore"
+         android:text="Reset" />
++
+ </RelativeLayout>
