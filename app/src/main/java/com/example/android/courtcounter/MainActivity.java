@@ -1,9 +1,12 @@
 package com.example.android.courtcounter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
     // Tracks the score for Teams
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         displayForTeamA(0);
+        displayForTeamB(0);
     }
 
 
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     /**
 
      * Displays the given score for Team A.
@@ -87,8 +92,11 @@ public class MainActivity extends AppCompatActivity {
     public void displayForTeamA(int scoreTeamA) {
 
         TextView scoreView = (TextView) findViewById(R.id.team_a_score);
-
         scoreView.setText(String.valueOf(scoreTeamA));
+
+        ProgressBar progressBarA = (ProgressBar) findViewById(R.id.progressBarA);
+        progressBarA.setProgress(scoreTeamA);
+
     }
 
 
@@ -101,8 +109,10 @@ public class MainActivity extends AppCompatActivity {
     public void displayForTeamB(int scoreTeamB) {
 
         TextView scoreView = (TextView) findViewById(R.id.team_b_score);
-
         scoreView.setText(String.valueOf(scoreTeamB));
+
+        ProgressBar progressBarB = (ProgressBar) findViewById(R.id.progressBarB);
+        progressBarB.setProgress(scoreTeamB);
     }
 
 
