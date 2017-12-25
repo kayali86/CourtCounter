@@ -1,6 +1,6 @@
 package com.example.android.courtcounter;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,81 +9,87 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    // Tracks the score for Teams
-    int scoreTeamA = 0;
-    int scoreTeamB = 0;
+    MyApplication myApplication = new MyApplication();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        displayForTeamA(0);
-        displayForTeamB(0);
+
+        /*
+
+          Get the Score values form variable to display it on TextView
+
+         */
+        displayForTeamA(myApplication.getScoreTeamA());
+        displayForTeamB(myApplication.getScoreTeamB());
+
     }
 
 
-    /**
+    /*
 
      * Increase the score for Team A.
 
      */
     public void addThreeToTeamA(View view) {
-        scoreTeamA = scoreTeamA + 3;
-        displayForTeamA(scoreTeamA);
+        myApplication.setScoreTeamA(3);
+        displayForTeamA(myApplication.getScoreTeamA());
     }
 
 
     public void addTwoToTeamA(View view) {
-        scoreTeamA = scoreTeamA + 2;
-        displayForTeamA(scoreTeamA);
+        myApplication.setScoreTeamA(2);
+        displayForTeamA(myApplication.getScoreTeamA());
     }
 
 
     public void addOneTeamA(View view) {
-        scoreTeamA = scoreTeamA + 1;
-        displayForTeamA(scoreTeamA);
+        myApplication.setScoreTeamA(1);
+        displayForTeamA(myApplication.getScoreTeamA());
     }
 
 
 
-    /**
+    /*
 
      * Increase the score for Team B.
 
      */
     public void addThreeToTeamB(View view) {
-        scoreTeamB = scoreTeamB + 3;
-        displayForTeamB(scoreTeamB);
+        myApplication.setScoreTeamB(3);
+        displayForTeamB(myApplication.getScoreTeamB());
     }
 
 
     public void addTwoToTeamB(View view) {
-        scoreTeamB = scoreTeamB + 2;
-        displayForTeamB(scoreTeamB);
+        myApplication.setScoreTeamB(2);
+        displayForTeamB(myApplication.getScoreTeamB());
     }
 
 
     public void addOneTeamB(View view) {
-        scoreTeamB = scoreTeamB + 1;
-        displayForTeamB(scoreTeamB);
+        myApplication.setScoreTeamB(1);
+        displayForTeamB(myApplication.getScoreTeamB());
     }
 
 
-    /**
+    /*
 
      * Reset the score by Zero.
 
      */
     public void resetScore(View view) {
-        scoreTeamA = 0;
-        scoreTeamB = 0;
+        myApplication.resetScoreTeamA();
+        myApplication.resetScoreTeamB();
         displayForTeamA(0);
         displayForTeamB(0);
     }
 
 
 
-    /**
+    /*
 
      * Displays the given score for Team A.
 
@@ -91,16 +97,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayForTeamA(int scoreTeamA) {
 
-        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
+        TextView scoreView = findViewById(R.id.team_a_score);
         scoreView.setText(String.valueOf(scoreTeamA));
 
-        ProgressBar progressBarA = (ProgressBar) findViewById(R.id.progressBarA);
+        ProgressBar progressBarA = findViewById(R.id.progressBarA);
         progressBarA.setProgress(scoreTeamA);
 
     }
 
 
-    /**
+    /*
 
      * Displays the given score for Team B.
 
@@ -108,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayForTeamB(int scoreTeamB) {
 
-        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
+        TextView scoreView = findViewById(R.id.team_b_score);
         scoreView.setText(String.valueOf(scoreTeamB));
 
-        ProgressBar progressBarB = (ProgressBar) findViewById(R.id.progressBarB);
+        ProgressBar progressBarB = findViewById(R.id.progressBarB);
         progressBarB.setProgress(scoreTeamB);
     }
 
