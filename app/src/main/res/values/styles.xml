@@ -9,4 +9,108 @@
         <item name="colorButtonNormal">#FF9800</item>
     </style>
 
+    <style name="scoreView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:textSize">56sp</item>
+    </style>
+
+    <style name="buttons">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+    </style>
+
+    <style name="progressbar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:layout_marginLeft">28dp</item>
+        <item name="android:layout_marginRight">28dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:progress">0</item>
+        <item name="android:max">200</item>
+    </style>
+
+    <style name="teamName">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#616161</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="resetButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="teamNameLand">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#616161</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="scoreViewLand">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:textSize">42sp</item>
+    </style>
+
+    <style name="progressbarLand" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:layout_marginLeft">28dp</item>
+        <item name="android:layout_marginRight">28dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:progress">0</item>
+        <item name="android:max">200</item>
+    </style>
+
+    <style name="buttonsLand">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+    </style>
+
+    <style name="resetButtonLand">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>
